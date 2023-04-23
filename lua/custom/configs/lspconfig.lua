@@ -45,3 +45,39 @@ lspconfig.dartls.setup {
     }
   },
 }
+
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  cmd = { "typescript-language-server", "--stdio" },
+  capabilities = capabilities
+}
+
+lspconfig.sourcekit.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lspconfig.lua_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+      Lua = {
+          diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = { 'vim' },
+          },
+
+          workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false
+          },
+      },
+  },
+}
+
+lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
